@@ -5,24 +5,24 @@
 
 def student_list():
     return ['zakithikhDBN2022 - 4 April - Johannesburg Physical - seat 3', 'ddhaalJHB2022 - 2 May - Cape Town Virtual',
-    'thandohDBN2022 - 4 April - Phokeng Physical - seat 3', 'zaneleJHB2022 - 2 May - Durban Virtual',
-    'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2', 'BusiJHB2022 - 2 May - Durban Virtual',
-    'zinhlehDBN2022 - 4 April - Phokeng Physical - seat 1', 'CebiJHB2022 - 2 May - Durban Virtual',
-    'lukhona - 4 April - Phokeng Virtual', 'ddhaalJHB2022 - 2 May - Durban Physical - seat 4',
-    'gabiDBN2022 - 4 April - Phokeng Virtual', 'ngakithilJHB2022 - 2 May - Durban Physical - seat 5',
-    'zimthembilehDBN2022 - 4 April - Phokeng Virtual', 'ngakuyelJHB2022 - 2 May - Durban Physical - seat 2',
-    'zimlindilehDBN2022 - 4 April - Phokeng Virtual', 'yenzileJHB2022 - 2 May - Durban Physical - seat 3',
-    'zimthandilehDBN2022 - 4 April - Johannesburg Virtual','kuhlengaweDBN2022 - 4 April - Durban Physical - seat 1',
-    'zimkhonzileDBN2022 - 4 April - Johannesburg Virtual','hlelokuhlehDBN2022 - 4 April - Durban Physical - seat 3',
-    'zizonkehDBN2022 - 4 April - Johannesburg Virtual','sibusisohDBN2022 - 4 April - Durban Physical - seat 2',
-    'kholekileDBN2022 - 4 April - Johannesburg Virtual','vusiDBN2022 - 4 April - Durban Physical - seat 9',
-    'kholelwahDBN2022 - 4 April - Johannesburg Virtual','zuzumuzihDBN2022 - 4 April - Durban Physical - seat 10',
-    'thembelahDBN2022 - 4 April - Johannesburg Virtual','babazileDBN2022 - 4 April - Durban Physical - seat 11',
-    'thembisileDBN2022 - 4 April - Johannesburg Virtual','owenkosiDBN2022 - 4 April - Durban Physical - seat 8',
-    'thembisiweDBN2022 - 4 April - Johannesburg Physical - seat 5', 'nobuhleJHB2022 - 2 May - Cape Town physical',
-    'thenjisiweDBN2022 - 4 April - Johannesburg Physical - seat 6', 'nonkonzoJHB2022 - 2 May - Cape Town Physical',
-    'thethelelileDBN2022 - 4 April - Johannesburg Physical - seat 7', 'nombusoJHB2022 - 2 May - Cape Town Virtual',
-    'thembiDBN2022 - 4 April - Johannesburg Physical - seat 4', 'nozizweJHB2022 - 2 May - Cape Town Virtual']
+            'thandohDBN2022 - 4 April - Phokeng Physical - seat 3', 'zaneleJHB2022 - 2 May - Durban Virtual',
+            'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2', 'BusiJHB2022 - 2 May - Durban Virtual',
+            'zinhlehDBN2022 - 4 April - Phokeng Physical - seat 1', 'CebiJHB2022 - 2 May - Durban Virtual',
+            'lukhona - 4 April - Phokeng Virtual', 'ddhaalJHB2022 - 2 May - Durban Physical - seat 4',
+            'gabiDBN2022 - 4 April - Phokeng Virtual', 'ngakithilJHB2022 - 2 May - Durban Physical - seat 5',
+            'zimthembilehDBN2022 - 4 April - Phokeng Virtual', 'ngakuyelJHB2022 - 2 May - Durban Physical - seat 2',
+            'zimlindilehDBN2022 - 4 April - Phokeng Virtual', 'yenzileJHB2022 - 2 May - Durban Physical - seat 3',
+            'zimthandilehDBN2022 - 4 April - Johannesburg Virtual', 'kuhlengaweDBN2022 - 4 April - Durban Physical - seat 1',
+            'zimkhonzileDBN2022 - 4 April - Johannesburg Virtual', 'hlelokuhlehDBN2022 - 4 April - Durban Physical - seat 3',
+            'zizonkehDBN2022 - 4 April - Johannesburg Virtual', 'sibusisohDBN2022 - 4 April - Durban Physical - seat 2',
+            'kholekileDBN2022 - 4 April - Johannesburg Virtual', 'vusiDBN2022 - 4 April - Durban Physical - seat 9',
+            'kholelwahDBN2022 - 4 April - Johannesburg Virtual', 'zuzumuzihDBN2022 - 4 April - Durban Physical - seat 10',
+            'thembelahDBN2022 - 4 April - Johannesburg Virtual', 'babazileDBN2022 - 4 April - Durban Physical - seat 11',
+            'thembisileDBN2022 - 4 April - Johannesburg Virtual', 'owenkosiDBN2022 - 4 April - Durban Physical - seat 8',
+            'thembisiweDBN2022 - 4 April - Johannesburg Physical - seat 5', 'nobuhleJHB2022 - 2 May - Cape Town Physical',
+            'thenjisiweDBN2022 - 4 April - Johannesburg Physical - seat 6', 'nonkonzoJHB2022 - 2 May - Cape Town Physical',
+            'thethelelileDBN2022 - 4 April - Johannesburg Physical - seat 7', 'nombusoJHB2022 - 2 May - Cape Town Virtual',
+            'thembiDBN2022 - 4 April - Johannesburg Physical - seat 4', 'nozizweJHB2022 - 2 May - Cape Town Virtual']
 
 
 def dbn_campus_students(student_list):
@@ -31,8 +31,11 @@ def dbn_campus_students(student_list):
     students in the Durban campus only.
     '''
     dbn_students = []
-
+    for student in student_list:
+        if 'Durban' in student:
+            dbn_students.append(student)
     return dbn_students
+# print(dbn_campus_students(student_list()))
 
 
 def cpt_campus_students(student_list):
@@ -41,8 +44,11 @@ def cpt_campus_students(student_list):
     students in the Cape Town campus only.
     '''
     cpt_students = []
-
+    for student in student_list:
+        if 'Cape Town' in student:
+            cpt_students.append(student)
     return cpt_students
+# print(cpt_campus_students(student_list()))
 
 
 def jhb_campus_students(student_list):
@@ -51,8 +57,11 @@ def jhb_campus_students(student_list):
     students in the Johannesburg campus only.
     '''
     jhb_students = []
-
+    for student in student_list:
+        if 'Johannesburg' in student:
+            jhb_students.append(student)
     return jhb_students
+# print(jhb_campus_students(student_list()))
 
 
 def nw_campus_students(student_list):
@@ -61,41 +70,64 @@ def nw_campus_students(student_list):
     students in the North West campus only.
     '''
     nw_students = []
-
+    for student in student_list:
+        if 'Phokeng' in student:
+            nw_students.append(student)
     return nw_students
 
-    
+#print(nw_campus_students(student_list()))
+
+
 def dbn_physical_students(dbn_students):
     '''
     from the list of dbn_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
-
+    dbn_physical_students = []
+    for student in dbn_students:
+        if 'Durban Physical' in student:
+            dbn_physical_students.append(student)
     return dbn_physical_students
-
+# print(dbn_physical_students(dbn_campus_students(student_list())))
 
 def dbn_physical_teams(dbn_physical_students):
     '''
     from the list of dbn_physical_students create list of 4 students per team, and add them to 
     one big list
     '''
-
+    dbn_physical_teams = []
+    team = [] 
+    index = 0
+    for student in dbn_physical_students:
+        index += 1
+        team.append(student)
+        if(index == 5):
+            dbn_physical_teams.append(list(team))
+            team.clear()
+            index = 0
+        #print(team)
+        #print(dbn_physical_teams)
     return dbn_physical_teams
-
+dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list())))
 
 def dbn_teams_file(durban_physical_teams):
     '''
     write and save the information in the dbn_physical_teams into a textfile
     '''
-
-
+    fpath = open('dbn_teams_file.txt','w+')
+    for team in durban_physical_teams:
+        fpath.writelines(team)  
+        print(team) 
+    fpath.close()   
+     
+dbn_teams_file(dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list()))))
 
 def cpt_physical_students(cpt_physical_students):
     '''
     from the list of cpt_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
-    
+
     return cpt_physical_students
 
 
@@ -104,7 +136,7 @@ def cpt_physical_teams(cpt_physical_teams):
     from the list of cpt_physical_students create list of 4 students per team, and add them to 
     one big list
     '''
-    
+
     return cpt_physical_teams
 
 
@@ -130,6 +162,7 @@ def jhb_physical_teams(jhb_physical_teams):
     '''
 
     return jhb_physical_teams
+
 
 def jhb_teams_file(jhb_final_teams):
     '''
@@ -192,4 +225,3 @@ if __name__ == '__main__':
     call all your functions below to make your program execute    
     '''
     pass
-
