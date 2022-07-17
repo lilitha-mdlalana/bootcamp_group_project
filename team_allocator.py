@@ -1,3 +1,6 @@
+#6982507979@bootcamp.wethinkcode.co.za
+
+import os
 '''
     This is the team allocator project solution example project
 '''
@@ -24,126 +27,127 @@ def student_list():
             'thethelelileDBN2022 - 4 April - Johannesburg Physical - seat 7', 'nombusoJHB2022 - 2 May - Cape Town Virtual',
             'thembiDBN2022 - 4 April - Johannesburg Physical - seat 4', 'nozizweJHB2022 - 2 May - Cape Town Virtual']
 
+#Custom functions
+def getStudentsByLocation(student_list,location):
+    students = []
+    for student in student_list:
+        if location in student:
+            students.append(student)
+    return students
+
+def getPhysicalTeams(physical_students):
+    student_teams = []
+    temp_teams = []
+    index = 0
+    for student in physical_students:
+        index += 1;
+        temp_teams.append(student)
+        if index == 4:
+            student_teams.append(list(temp_teams))
+            temp_teams.clear()
+            index = 0
+    return student_teams        
+
 
 def dbn_campus_students(student_list):
     '''
     from the list of students above, fill in this function to return a list of all
     students in the Durban campus only.
     '''
-    dbn_students = []
-    for student in student_list:
-        if 'Durban' in student:
-            dbn_students.append(student)
-    return dbn_students
-# print(dbn_campus_students(student_list()))
-
+    dbn_campus_students = getStudentsByLocation(student_list,'Durban')
+    return dbn_campus_students
+print(dbn_campus_students(student_list()))
 
 def cpt_campus_students(student_list):
     '''
     from the list of students above, fill in this function to return a list of all
     students in the Cape Town campus only.
     '''
-    cpt_students = []
-    for student in student_list:
-        if 'Cape Town' in student:
-            cpt_students.append(student)
+    cpt_students = getStudentsByLocation(student_list,'Cape Town')
     return cpt_students
-# print(cpt_campus_students(student_list()))
-
 
 def jhb_campus_students(student_list):
     '''
     from the list of students above, fill in this function to return a list of all
     students in the Johannesburg campus only.
     '''
-    jhb_students = []
-    for student in student_list:
-        if 'Johannesburg' in student:
-            jhb_students.append(student)
+    jhb_students = getStudentsByLocation(student_list,'Johannesburg')
     return jhb_students
-# print(jhb_campus_students(student_list()))
-
 
 def nw_campus_students(student_list):
     '''
     from the list of students above, fill in this function to return a list of all
     students in the North West campus only.
     '''
-    nw_students = []
-    for student in student_list:
-        if 'Phokeng' in student:
-            nw_students.append(student)
+    nw_students = getStudentsByLocation(student_list,'Phokeng')
     return nw_students
-
-#print(nw_campus_students(student_list()))
-
 
 def dbn_physical_students(dbn_students):
     '''
     from the list of dbn_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
-    dbn_physical_students = []
-    for student in dbn_students:
-        if 'Durban Physical' in student:
-            dbn_physical_students.append(student)
+    dbn_physical_students = getStudentsByLocation(dbn_students,'Durban Physical')
     return dbn_physical_students
-# print(dbn_physical_students(dbn_campus_students(student_list())))
 
 def dbn_physical_teams(dbn_physical_students):
     '''
     from the list of dbn_physical_students create list of 4 students per team, and add them to 
     one big list
     '''
-    dbn_physical_teams = []
-    team = [] 
-    index = 0
-    for student in dbn_physical_students:
-        index += 1
-        team.append(student)
-        if(index == 5):
-            dbn_physical_teams.append(list(team))
-            team.clear()
-            index = 0
-        #print(team)
-        #print(dbn_physical_teams)
+    dbn_physical_teams = getPhysicalTeams(dbn_physical_students)
     return dbn_physical_teams
-dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list())))
 
 def dbn_teams_file(durban_physical_teams):
     '''
     write and save the information in the dbn_physical_teams into a textfile
     '''
-    fpath = open('dbn_teams_file.txt','w+')
+    if not os.path.exists('team_allocator_teams/'):
+        os.mkdir('team_allocator_teams')
+    fpath = open('team_allocator_teams/dbn_teams_file.txt','w+')
     for team in durban_physical_teams:
-        fpath.writelines(team)  
-        print(team) 
+        # fpath.writelines(team)  
+        # fpath.write('\n')
+         fpath.write(' '.join(map(str,team)) + '\n')
     fpath.close()   
      
-dbn_teams_file(dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list()))))
 
 def cpt_physical_students(cpt_physical_students):
     '''
     from the list of cpt_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
+    cpt_campus_physical_students = getStudentsByLocation(cpt_physical_students,'Cape Town Physical')
+    return cpt_campus_physical_students
 
-    return cpt_physical_students
 
-
-def cpt_physical_teams(cpt_physical_teams):
+def cpt_physical_teams(cpt_physical_students):
     '''
     from the list of cpt_physical_students create list of 4 students per team, and add them to 
     one big list
     '''
-
+    cpt_physical_teams = []
+    team = [] 
+    index = 0
+    for student in cpt_physical_students:
+        index += 1
+        team.append(student)
+        if(index == 4):
+            dbn_physical_teams.append(list(team))
+            team.clear()
+            index = 0
     return cpt_physical_teams
-
 
 def cpt_teams_file(capetown_final_teams):
     '''
     write and save the information in the cpt_physical_teams into a textfile
     '''
+    if not os.path.exists('team_allocator_teams/'):
+        os.mkdir('team_allocator_teams')
+    fpath = open('team_allocator_teams/cpt_final_teams_file.txt','w+')
+    for team in capetown_final_teams:
+         fpath.write(' '.join(map(str,team)) + '\n')
+    fpath.close() 
 
 
 def jhb_physical_students(jhb_physical_students):
@@ -151,47 +155,83 @@ def jhb_physical_students(jhb_physical_students):
     from the list of jhb_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
+    johannesburg_physical_students = []
+    for student in jhb_physical_students:
+        if 'Johannesburg Physical' in student:
+            johannesburg_physical_students.append(student)
+    return johannesburg_physical_students
 
-    return jhb_physical_students
-
-
-def jhb_physical_teams(jhb_physical_teams):
+def jhb_physical_teams(jhb_physical_students):
     '''
     from the list of jhb_physical_students create list of 4 students per team, and add them to 
     one big list
     '''
+    johannesburg_physical_teams = []
+    team = []
+    index = 0
+    for student in jhb_physical_students:
+        index += 1
+        team.append(student)
+        if(index == 4):
+            johannesburg_physical_teams.append(list(team))
+            team.clear()
+            index = 0
 
-    return jhb_physical_teams
+    return johannesburg_physical_teams
 
 
 def jhb_teams_file(jhb_final_teams):
     '''
     write and save the information in the jhb_physical_teams into a textfile
     '''
-
+    if not os.path.exists('team_allocator_teams/'):
+        os.mkdir('team_allocator_teams')
+    fpath = open('team_allocator_teams/jhb_final_teams.txt','w+')
+    for team in jhb_final_teams:
+        # fpath.writelines(team)
+        # fpath.write('\n')
+        fpath.write(' '.join(map(str,team)) + '\n')
+    fpath.close() 
 
 def nw_physical_students(nw_physical_students):
     '''
     from the list of nw_campus_students, fill in this function to return a list of all
     students who will be attending physically on campus
     '''
-
+    phokeng_physical_students = []
+    for student in nw_physical_students:
+        if 'Phokeng Physical' in student:
+            phokeng_physical_students.append(student)
     return nw_physical_students
 
-
-def nw_physical_teams(nw_physical_teams):
+def nw_physical_teams(nw_physical_students):
     '''
     from the list of nw_physical_students, create list of 4 students per team, and add them to 
     one big list
     '''
-
-    return nw_physical_teams
-
+    phokeng_physical_teams = []
+    team = []
+    index = 0
+    for student in nw_physical_students:
+        index += 1
+        team.append(student)
+        if index == 4:
+            phokeng_physical_teams.append(list(team))
+            team.clear()
+            index = 0
+    return phokeng_physical_teams
 
 def nw_teams_file(nw_final_teams):
     '''
     write and save the information in the nw_physical_teams into a textfile
     '''
+    if not os.path.exists('team_allocator_teams/'):
+            os.mkdir('team_allocator_teams')
+    fpath = open('team_allocator_teams/nw_final_teams.txt','w+')
+    for team in nw_final_teams:
+        fpath.writelines(team)
+        fpath.write('\n')
+    fpath.close() 
 
 
 def get_virtual_students(student_list):
@@ -199,9 +239,11 @@ def get_virtual_students(student_list):
     from the list of students above, fill in this function to return a list of all
     students attending virtually.
     '''
-    virtual_campus = []
-
-    return virtual_campus
+    virtual_students = []
+    for student in student_list:
+        if 'Virtual' in student:
+            virtual_students.append(student)
+    return virtual_students
 
 
 def virtual_teams(virtual_students_list):
@@ -210,18 +252,47 @@ def virtual_teams(virtual_students_list):
         one big list
     '''
     virtual_teams = []
-
+    team = []
+    index = 0
+    for student in virtual_students_list:
+        index += 1
+        team.append(student)
+        if index == 4:
+            virtual_teams.append(list(team))
+            team.clear()
+            index = 0
     return virtual_teams
-
 
 def virtual_teams_file(virtual_teams):
     '''
     write and save the information in the virtual_teams into a textfile
     '''
-
+    fpath = open('team_allocator_teams/virtual_teams.txt','w+')
+    for team in virtual_teams:
+        fpath.writelines(team)
+        fpath.write("\n")
+    fpath.close()
 
 if __name__ == '__main__':
     '''
     call all your functions below to make your program execute    
     '''
-    pass
+    dbn_campus_students(student_list())
+    cpt_campus_students(student_list())
+    jhb_campus_students(student_list())
+    nw_campus_students(student_list())
+    dbn_physical_students(dbn_campus_students(student_list()))
+    dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list())))
+    dbn_teams_file(dbn_physical_teams(dbn_physical_students(dbn_campus_students(student_list()))))
+    cpt_physical_students(cpt_campus_students(student_list()))
+    cpt_physical_teams(cpt_physical_students(cpt_campus_students(student_list())))
+    cpt_teams_file(cpt_physical_teams(cpt_physical_students(cpt_campus_students(student_list()))))
+    jhb_physical_students(jhb_campus_students(student_list()))
+    jhb_physical_teams(jhb_physical_students(jhb_campus_students(student_list())))
+    jhb_teams_file(jhb_physical_teams(jhb_physical_students(student_list())))
+    nw_physical_students(nw_campus_students(student_list()))
+    nw_physical_teams(nw_physical_students(nw_campus_students(student_list())))
+    nw_teams_file(nw_physical_teams(nw_physical_students(student_list())))
+    get_virtual_students(student_list())
+    virtual_teams(get_virtual_students(student_list()))
+    virtual_teams_file(virtual_teams(get_virtual_students(student_list())))
